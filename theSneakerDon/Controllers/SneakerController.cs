@@ -17,6 +17,12 @@ namespace theSneakerDon.Controllers
             _sneakerRepository = sneakerRepository;
             _categoryRepository = categoryRepository;
         }
+
+        public ViewResult List()
+        {
+            return View(_sneakerRepository.GetAllSneaker); 
+        }
+
         // GET: SneakerController
         public ActionResult Index()
         {
