@@ -11,7 +11,7 @@ namespace theSneakerDon.Models
         {
             get;
         }
-        IEnumerable<Sneaker> GetCandyOnSale
+        IEnumerable<Sneaker> GetSneakerOnSale
         {
             get;
         }
