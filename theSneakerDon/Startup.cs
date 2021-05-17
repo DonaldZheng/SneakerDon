@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using theSneakerDon.Data;
+using theSneakerDon.Models;
 
 namespace theSneakerDon
 {
@@ -38,6 +39,9 @@ namespace theSneakerDon
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ISneakerRepository, SneakerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
