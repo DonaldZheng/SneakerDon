@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using theSneakerDon.Models;
+using theSneakerDon.ViewModels;
 
 namespace theSneakerDon.Controllers
 {
@@ -18,9 +19,13 @@ namespace theSneakerDon.Controllers
             _categoryRepository = categoryRepository;
         }
 
-        public ViewResult List()
+        public IActionResult List()
         {
-            return View(_sneakerRepository.GetAllSneaker); 
+            //return View(_sneakerRepository.GetAllSneaker); 
+            var sneakerListViewModel = new SneakerListViewModel();
+            sneakerListViewModel.Sneakers = _sneakerRepository.GetAllSneaker;
+            sneakerListViewModel.CurrentCategory = "Best Sellers";
+            return View(sneakerListViewModel);
         }
 
         // GET: SneakerController
