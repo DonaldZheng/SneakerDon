@@ -11,11 +11,11 @@ namespace theSneakerDon.Models
         {
             get; set;
         }
-        public int CategoryName
+        public string CategoryName
         {
             get; set;
         }
-        public int CategoryDescription
+        public string CategoryDescription
         {
             get; set;
         }
