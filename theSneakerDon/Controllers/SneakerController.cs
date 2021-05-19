@@ -37,7 +37,11 @@ namespace theSneakerDon.Controllers
         // GET: SneakerController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var sneaker = _sneakerRepository.GetSneakerById(id);
+            if (sneaker == null)
+                return NotFound();
+
+            return View(sneaker);
         }
 
         // GET: SneakerController/Create
