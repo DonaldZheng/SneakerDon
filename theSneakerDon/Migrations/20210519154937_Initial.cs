@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
-namespace theSneakerDon.Data.Migrations
+namespace theSneakerDon.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,11 +47,25 @@ namespace theSneakerDon.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    CategoryId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoryName = table.Column<string>(nullable: true),
+                    CategoryDescription = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -73,7 +86,7 @@ namespace theSneakerDon.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -153,6 +166,56 @@ namespace theSneakerDon.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Sneaker",
+                columns: table => new
+                {
+                    SneakerId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: false),
+                    ImageUrl = table.Column<string>(nullable: true),
+                    ImageThumbnailUrl = table.Column<string>(nullable: true),
+                    IsOnSale = table.Column<bool>(nullable: false),
+                    IsInStock = table.Column<bool>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sneaker", x => x.SneakerId);
+                    table.ForeignKey(
+                        name: "FK_Sneaker_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryId", "CategoryDescription", "CategoryName" },
+                values: new object[,]
+                {
+                    { 1, null, "Jordan 1" },
+                    { 2, null, "Jordan 3" },
+                    { 3, null, "Jordan 4" },
+                    { 4, null, "Jordan 6" },
+                    { 5, null, "Jordan 11" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Sneaker",
+                columns: new[] { "SneakerId", "CategoryId", "Description", "ImageThumbnailUrl", "ImageUrl", "IsInStock", "IsOnSale", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 1, 1, "Test test test test", "\\Images\\Jordan1.jpg", "\\Images\\Jordan1.jpg", true, false, "Jordan 1", 170m },
+                    { 2, 2, "Test test test test", "\\Images\\Jordan3.jpg", "\\Images\\Jordan3.jpg", true, false, "Jordan 3", 220m },
+                    { 3, 3, "Test test test test", "\\Images\\jordan4.jpg", "\\Images\\jordan4.jpg", true, false, "Jordan 4", 220m },
+                    { 4, 4, "Test test test test", "\\Images\\Jordan6.jpg", "\\Images\\Jordan6.jpg", true, false, "Jordan 6", 250m },
+                    { 5, 5, "Test test test test", "\\Images\\Jordan11.jpg", "\\Images\\Jordan11.jpg", true, false, "Jordan 11", 220m }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -191,6 +254,11 @@ namespace theSneakerDon.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sneaker_CategoryId",
+                table: "Sneaker",
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -211,10 +279,16 @@ namespace theSneakerDon.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Sneaker");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

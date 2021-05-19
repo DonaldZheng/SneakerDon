@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using theSneakerDon.Data;
 
 namespace theSneakerDon.Models
 {
     public class CategoryRepository : ICategoryRepository
     {
-        public IEnumerable<Category> GetAllCategories => new List<Category>
+        private readonly ApplicationDbContext _applicationDbContext;
+        public CategoryRepository(ApplicationDbContext applicationDbContext)
         {
-            new Category{ CategoryId = 1, CategoryName =" Jordan 1", CategoryDescription = "Classic Jordans"},
-            new Category{ CategoryId = 2, CategoryName =" Jordan 3", CategoryDescription = "Classic Jordans"},
-            new Category{ CategoryId = 3, CategoryName =" Jordan 4", CategoryDescription = "Classic Jordans"}
-        };
+            _applicationDbContext = applicationDbContext;
+        }
+        public IEnumerable<Category> GetAllCategories => _applicationDbContext.Categories;
     }
 }
