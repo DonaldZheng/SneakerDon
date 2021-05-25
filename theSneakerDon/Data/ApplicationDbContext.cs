@@ -78,7 +78,7 @@ namespace theSneakerDon.Data
                 ImageUrl = "\\Images\\Jordan6.jpg",
                 ImageThumbnailUrl = "\\Images\\Jordan6.jpg",
                 IsInStock = true,
-                IsOnSale = false
+                IsOnSale = true
             });
             builder.Entity<Sneaker>().HasData(new Sneaker
             {

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-theSneakerDon-4D8959E9-7FBF-4366-99E5-1F9CA5A4DF29</UserSecretsId>
+    <AssemblyName>`</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

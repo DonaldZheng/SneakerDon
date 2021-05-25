@@ -2,12 +2,14 @@
 
 
 
-
+<center>
     <h1>@Model.CurrentCategory</h1>
+</center>
     @foreach (var sneaker in Model.Sneakers)
     {
         <partial name="_sneakerCard" model="sneaker" />
     }
+
 
 
 
