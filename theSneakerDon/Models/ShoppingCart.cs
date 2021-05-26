@@ -89,5 +89,11 @@ namespace theSneakerDon.Models
             _applicationDbContext.ShoppingCartItems.RemoveRange(cartItems);
             _applicationDbContext.SaveChanges();
         }
+
+        public decimal GetShoppingCartTotal()
+        {
+            var total = _applicationDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId).Select(c => c.Sneaker.Price * c.Amount).Sum();
+            return total;
+        }
     }
 }

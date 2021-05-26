@@ -42,6 +42,10 @@ namespace theSneakerDon
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISneakerRepository, SneakerRepository>();
+            services.AddScoped<ShoppingCart>(sc => ShoppingCart.GetCart(sc));
+
+            services.AddHttpContextAccessor();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +64,7 @@ namespace theSneakerDon
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 
