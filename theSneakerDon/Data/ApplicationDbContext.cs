@@ -22,6 +22,11 @@ namespace theSneakerDon.Data
         {
             get; set;
         }
+        public DbSet<ShoppingCartItem> ShoppingCartItems
+        {
+            get; set;
+        }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
