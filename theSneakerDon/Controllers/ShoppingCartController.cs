@@ -29,5 +29,27 @@ namespace theSneakerDon.Controllers
             };
             return View(shoppingCartViewModel);
         }
+
+        public RedirectToActionResult AddToShoppingCart(int sneakerId)
+        {
+            var selectedSneaker = _sneakerRepository.GetAllSneaker.FirstOrDefault(c => c.SneakerId == sneakerId);
+            if (selectedSneaker != null)
+            {
+                _shoppingCart.AddToCart(selectedSneaker, 1);
+            }
+            return RedirectToAction("Index");
+
+        }
+        public RedirectToActionResult RemoveFromShoppingCart(int sneakerId)
+        {
+            var selectedSneaker = _sneakerRepository.GetAllSneaker.FirstOrDefault(s => s.SneakerId == sneakerId);
+            if (selectedSneaker != null)
+            {
+                _shoppingCart.RemoveFromCart(selectedSneaker);
+            }
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

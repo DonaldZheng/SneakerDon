@@ -30,7 +30,7 @@ namespace theSneakerDon.Models
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 
             var context = services.GetService<ApplicationDbContext>();
-            string cartId = session.GetString("CardId") ?? Guid.NewGuid().ToString();
+            string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
             session.SetString("CartId", cartId);
 
             return new ShoppingCart(context) { ShoppingCartId = cartId };
