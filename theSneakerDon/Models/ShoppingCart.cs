@@ -55,5 +55,26 @@ namespace theSneakerDon.Models
             }
             _applicationDbContext.SaveChanges();
         }
+        public int RemoveFromCart(Sneaker sneaker)
+        {
+            var shoppingCartItem = _applicationDbContext.ShoppingCartItems.SingleOrDefault(s => s.Sneaker.SneakerId == sneaker.SneakerId && s.ShoppingCartId == ShoppingCartId);
+            var localAmount = 0;
+
+            if (shoppingCartItem != null)
+            {
+                if (shoppingCartItem.Amount > 1)
+                {
+                    shoppingCartItem.Amount--;
+                    localAmount = shoppingCartItem.Amount;
+                }
+                else
+                {
+                    _applicationDbContext.ShoppingCartItems.Remove(shoppingCartItem);
+                }
+            }
+            _applicationDbContext.SaveChanges();
+            return localAmount;
+
+        }
     }
 }
