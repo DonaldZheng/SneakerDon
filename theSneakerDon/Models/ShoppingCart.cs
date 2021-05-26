@@ -34,5 +34,26 @@ namespace theSneakerDon.Models
 
             return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
+
+        public void AddToCart(Sneaker sneaker, int amount)
+        {
+            var shoppingCartItem = _applicationDbContext.ShoppingCartItems.SingleOrDefault(s => s.Sneaker.SneakerId == sneaker.SneakerId && s.ShoppingCartId == ShoppingCartId);
+
+            if (shoppingCartItem == null)
+            {
+                shoppingCartItem = new ShoppingCartItem
+                {
+                    ShoppingCartId = ShoppingCartId,
+                    Sneaker = sneaker,
+                    Amount = amount
+                };
+                _applicationDbContext.ShoppingCartItems.Add(shoppingCartItem);
+            }
+            else
+            {
+                shoppingCartItem.Amount++;
+            }
+            _applicationDbContext.SaveChanges();
+        }
     }
 }
