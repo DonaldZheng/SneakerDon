@@ -82,5 +82,12 @@ namespace theSneakerDon.Models
             return ShoppingCartItems ?? (ShoppingCartItems = _applicationDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
                 .Include(s => s.Sneaker).ToList());
         }
+
+        public void ClearCart()
+        {
+            var cartItems = _applicationDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId);
+            _applicationDbContext.ShoppingCartItems.RemoveRange(cartItems);
+            _applicationDbContext.SaveChanges();
+        }
     }
 }
