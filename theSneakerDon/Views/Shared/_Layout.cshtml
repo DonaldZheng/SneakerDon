@@ -9,6 +9,7 @@
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -28,6 +29,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Sneaker" asp-action="List">Sneakers</a>
                         </li>
+                        @await Component.InvokeAsync("ShoppingCartSummary") 
                     </ul>
                 </div>
             </div>
