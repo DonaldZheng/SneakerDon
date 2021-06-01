@@ -10,8 +10,8 @@ using theSneakerDon.Data;
 namespace theSneakerDon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210525210712_AddingShoppingCartItem")]
-    partial class AddingShoppingCartItem
+    [Migration("20210601164847_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -299,9 +299,6 @@ namespace theSneakerDon.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ImageThumbnailUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -331,7 +328,6 @@ namespace theSneakerDon.Migrations
                         {
                             SneakerId = 1,
                             CategoryId = 1,
-                            Description = "Test test test test",
                             ImageThumbnailUrl = "\\Images\\Jordan1.jpg",
                             ImageUrl = "\\Images\\Jordan1.jpg",
                             IsInStock = true,
@@ -343,7 +339,6 @@ namespace theSneakerDon.Migrations
                         {
                             SneakerId = 2,
                             CategoryId = 2,
-                            Description = "Test test test test",
                             ImageThumbnailUrl = "\\Images\\Jordan3.jpg",
                             ImageUrl = "\\Images\\Jordan3.jpg",
                             IsInStock = true,
@@ -355,7 +350,6 @@ namespace theSneakerDon.Migrations
                         {
                             SneakerId = 3,
                             CategoryId = 3,
-                            Description = "Test test test test",
                             ImageThumbnailUrl = "\\Images\\jordan4.jpg",
                             ImageUrl = "\\Images\\jordan4.jpg",
                             IsInStock = true,
@@ -367,7 +361,6 @@ namespace theSneakerDon.Migrations
                         {
                             SneakerId = 4,
                             CategoryId = 4,
-                            Description = "Test test test test",
                             ImageThumbnailUrl = "\\Images\\Jordan6.jpg",
                             ImageUrl = "\\Images\\Jordan6.jpg",
                             IsInStock = true,
@@ -379,7 +372,6 @@ namespace theSneakerDon.Migrations
                         {
                             SneakerId = 5,
                             CategoryId = 5,
-                            Description = "Test test test test",
                             ImageThumbnailUrl = "\\Images\\Jordan11.jpg",
                             ImageUrl = "\\Images\\Jordan11.jpg",
                             IsInStock = true,

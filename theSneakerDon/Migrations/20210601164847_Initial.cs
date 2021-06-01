@@ -173,7 +173,6 @@ namespace theSneakerDon.Migrations
                     SneakerId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: false),
                     ImageUrl = table.Column<string>(nullable: true),
                     ImageThumbnailUrl = table.Column<string>(nullable: true),
@@ -192,6 +191,27 @@ namespace theSneakerDon.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ShoppingCartItems",
+                columns: table => new
+                {
+                    ShoppingCartItemId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ShoppingCartId = table.Column<string>(nullable: true),
+                    SneakerId = table.Column<int>(nullable: true),
+                    Amount = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCartItems", x => x.ShoppingCartItemId);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartItems_Sneaker_SneakerId",
+                        column: x => x.SneakerId,
+                        principalTable: "Sneaker",
+                        principalColumn: "SneakerId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "CategoryId", "CategoryDescription", "CategoryName" },
@@ -206,14 +226,14 @@ namespace theSneakerDon.Migrations
 
             migrationBuilder.InsertData(
                 table: "Sneaker",
-                columns: new[] { "SneakerId", "CategoryId", "Description", "ImageThumbnailUrl", "ImageUrl", "IsInStock", "IsOnSale", "Name", "Price" },
+                columns: new[] { "SneakerId", "CategoryId", "ImageThumbnailUrl", "ImageUrl", "IsInStock", "IsOnSale", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, 1, "Test test test test", "\\Images\\Jordan1.jpg", "\\Images\\Jordan1.jpg", true, false, "Jordan 1", 170m },
-                    { 2, 2, "Test test test test", "\\Images\\Jordan3.jpg", "\\Images\\Jordan3.jpg", true, false, "Jordan 3", 220m },
-                    { 3, 3, "Test test test test", "\\Images\\jordan4.jpg", "\\Images\\jordan4.jpg", true, false, "Jordan 4", 220m },
-                    { 4, 4, "Test test test test", "\\Images\\Jordan6.jpg", "\\Images\\Jordan6.jpg", true, false, "Jordan 6", 250m },
-                    { 5, 5, "Test test test test", "\\Images\\Jordan11.jpg", "\\Images\\Jordan11.jpg", true, false, "Jordan 11", 220m }
+                    { 1, 1, "\\Images\\Jordan1.jpg", "\\Images\\Jordan1.jpg", true, false, "Jordan 1", 170m },
+                    { 2, 2, "\\Images\\Jordan3.jpg", "\\Images\\Jordan3.jpg", true, false, "Jordan 3", 220m },
+                    { 3, 3, "\\Images\\jordan4.jpg", "\\Images\\jordan4.jpg", true, false, "Jordan 4", 220m },
+                    { 4, 4, "\\Images\\Jordan6.jpg", "\\Images\\Jordan6.jpg", true, true, "Jordan 6", 250m },
+                    { 5, 5, "\\Images\\Jordan11.jpg", "\\Images\\Jordan11.jpg", true, false, "Jordan 11", 220m }
                 });
 
             migrationBuilder.CreateIndex(
@@ -256,6 +276,11 @@ namespace theSneakerDon.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCartItems_SneakerId",
+                table: "ShoppingCartItems",
+                column: "SneakerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Sneaker_CategoryId",
                 table: "Sneaker",
                 column: "CategoryId");
@@ -279,13 +304,16 @@ namespace theSneakerDon.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Sneaker");
+                name: "ShoppingCartItems");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Sneaker");
 
             migrationBuilder.DropTable(
                 name: "Categories");
