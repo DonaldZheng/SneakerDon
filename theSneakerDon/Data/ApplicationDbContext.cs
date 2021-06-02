@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,11 @@ namespace theSneakerDon.Data
         {
             get; set;
         }
+        public DbSet<Customer> Customers
+        {
+            get; set;
+        }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -43,6 +49,9 @@ namespace theSneakerDon.Data
             builder.Entity<Category>().HasData(new Category { CategoryId = 3, CategoryName = "Jordan 4" });
             builder.Entity<Category>().HasData(new Category { CategoryId = 4, CategoryName = "Jordan 6" });
             builder.Entity<Category>().HasData(new Category { CategoryId = 5, CategoryName = "Jordan 11" });
+
+            builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Customer", NormalizedName = "CUSTOMER" });
+            builder.Entity<IdentityRole>().HasData(new IdentityRole{Name = "Admin", NormalizedName = "ADMIN"});
 
             builder.Entity<Sneaker>().HasData(new Sneaker
             {
