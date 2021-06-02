@@ -103,6 +103,28 @@ namespace theSneakerDon.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Admins",
+                columns: table => new
+                {
+                    AdminId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    IdentityUserId = table.Column<string>(nullable: true),
+                    Longitude = table.Column<double>(nullable: false),
+                    Latitude = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Admins", x => x.AdminId);
+                    table.ForeignKey(
+                        name: "FK_Admins_AspNetUsers_IdentityUserId",
+                        column: x => x.IdentityUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
@@ -293,8 +315,8 @@ namespace theSneakerDon.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "34f62374-11d9-47e7-9a86-bed4411db755", "2caeb0dd-cf1f-4966-87b1-d4c9c4bebc1d", "Customer", "CUSTOMER" },
-                    { "73aa94c5-0a90-4280-942c-d1f052cabd50", "de06369a-f740-4d0e-bbc4-5f5ce9690f7d", "Admin", "ADMIN" }
+                    { "8938dda1-4aa5-41e2-b3f1-66feaa6e1fc7", "a9dfb6fa-346d-4d0d-ad69-f23a4b02a5fd", "Customer", "CUSTOMER" },
+                    { "31b95350-a092-4d81-86ad-0cc432179b26", "7f8b0c3f-267f-43f7-9992-e527c0f18269", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -320,6 +342,11 @@ namespace theSneakerDon.Migrations
                     { 4, 4, "\\Images\\Jordan6.jpg", "\\Images\\Jordan6.jpg", true, true, "Jordan 6", 250m },
                     { 5, 5, "\\Images\\Jordan11.jpg", "\\Images\\Jordan11.jpg", true, false, "Jordan 11", 220m }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Admins_IdentityUserId",
+                table: "Admins",
+                column: "IdentityUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -388,6 +415,9 @@ namespace theSneakerDon.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Admins");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

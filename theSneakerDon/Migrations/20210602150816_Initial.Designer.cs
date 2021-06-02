@@ -10,7 +10,7 @@ using theSneakerDon.Data;
 namespace theSneakerDon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210602144953_Initial")]
+    [Migration("20210602150816_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,15 +50,15 @@ namespace theSneakerDon.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "34f62374-11d9-47e7-9a86-bed4411db755",
-                            ConcurrencyStamp = "2caeb0dd-cf1f-4966-87b1-d4c9c4bebc1d",
+                            Id = "8938dda1-4aa5-41e2-b3f1-66feaa6e1fc7",
+                            ConcurrencyStamp = "a9dfb6fa-346d-4d0d-ad69-f23a4b02a5fd",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "73aa94c5-0a90-4280-942c-d1f052cabd50",
-                            ConcurrencyStamp = "de06369a-f740-4d0e-bbc4-5f5ce9690f7d",
+                            Id = "31b95350-a092-4d81-86ad-0cc432179b26",
+                            ConcurrencyStamp = "7f8b0c3f-267f-43f7-9992-e527c0f18269",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -231,6 +231,32 @@ namespace theSneakerDon.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("theSneakerDon.Models.Admin", b =>
+                {
+                    b.Property<int>("AdminId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AdminId");
+
+                    b.HasIndex("IdentityUserId");
+
+                    b.ToTable("Admins");
                 });
 
             modelBuilder.Entity("theSneakerDon.Models.Category", b =>
@@ -558,6 +584,13 @@ namespace theSneakerDon.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("theSneakerDon.Models.Admin", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
                 });
 
             modelBuilder.Entity("theSneakerDon.Models.Customer", b =>

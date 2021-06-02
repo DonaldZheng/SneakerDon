@@ -39,6 +39,10 @@ namespace theSneakerDon.Data
         {
             get; set;
         }
+        public DbSet<Admin> Admins
+        {
+            get; set;
+        }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
