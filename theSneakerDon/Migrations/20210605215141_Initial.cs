@@ -8,6 +8,21 @@ namespace theSneakerDon.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Articles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Active = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Articles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -79,6 +94,28 @@ namespace theSneakerDon.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.OrderId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ArticleComments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Comments = table.Column<string>(nullable: true),
+                    PublishedDate = table.Column<DateTime>(nullable: false),
+                    ArticlesId = table.Column<int>(nullable: false),
+                    Rating = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArticleComments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ArticleComments_Articles_ArticlesId",
+                        column: x => x.ArticlesId,
+                        principalTable: "Articles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -317,8 +354,8 @@ namespace theSneakerDon.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "ddfa0e65-ba88-42e6-80e2-15c880631067", "307f621f-ad43-49fd-872c-e03c40b2e0f9", "Customer", "CUSTOMER" },
-                    { "c0638316-6b9d-4c0a-a533-72d3183c92f2", "486a378c-c7ec-4007-9fbe-58727f42046d", "Admin", "ADMIN" }
+                    { "09628951-4896-476c-b578-20be765b0a6d", "9d0f4214-c351-40d1-9594-698b6d43f601", "Customer", "CUSTOMER" },
+                    { "225f73f8-85a4-4cad-b6b7-fa0bd1addba1", "dd9d4b16-d308-4ea9-b62c-26945b66b2b9", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -349,6 +386,11 @@ namespace theSneakerDon.Migrations
                 name: "IX_Admins_IdentityUserId",
                 table: "Admins",
                 column: "IdentityUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArticleComments_ArticlesId",
+                table: "ArticleComments",
+                column: "ArticlesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -421,6 +463,9 @@ namespace theSneakerDon.Migrations
                 name: "Admins");
 
             migrationBuilder.DropTable(
+                name: "ArticleComments");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -443,6 +488,9 @@ namespace theSneakerDon.Migrations
 
             migrationBuilder.DropTable(
                 name: "ShoppingCartItems");
+
+            migrationBuilder.DropTable(
+                name: "Articles");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

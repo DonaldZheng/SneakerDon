@@ -10,7 +10,7 @@ using theSneakerDon.Data;
 namespace theSneakerDon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210605204955_Initial")]
+    [Migration("20210605215141_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,15 +50,15 @@ namespace theSneakerDon.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ddfa0e65-ba88-42e6-80e2-15c880631067",
-                            ConcurrencyStamp = "307f621f-ad43-49fd-872c-e03c40b2e0f9",
+                            Id = "09628951-4896-476c-b578-20be765b0a6d",
+                            ConcurrencyStamp = "9d0f4214-c351-40d1-9594-698b6d43f601",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "c0638316-6b9d-4c0a-a533-72d3183c92f2",
-                            ConcurrencyStamp = "486a378c-c7ec-4007-9fbe-58727f42046d",
+                            Id = "225f73f8-85a4-4cad-b6b7-fa0bd1addba1",
+                            ConcurrencyStamp = "dd9d4b16-d308-4ea9-b62c-26945b66b2b9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -257,6 +257,53 @@ namespace theSneakerDon.Migrations
                     b.HasIndex("IdentityUserId");
 
                     b.ToTable("Admins");
+                });
+
+            modelBuilder.Entity("theSneakerDon.Models.Article", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("theSneakerDon.Models.ArticleComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ArticlesId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PublishedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticlesId");
+
+                    b.ToTable("ArticleComments");
                 });
 
             modelBuilder.Entity("theSneakerDon.Models.Category", b =>
@@ -597,6 +644,15 @@ namespace theSneakerDon.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
+                });
+
+            modelBuilder.Entity("theSneakerDon.Models.ArticleComment", b =>
+                {
+                    b.HasOne("theSneakerDon.Models.Article", "Articles")
+                        .WithMany("ArticlesComments")
+                        .HasForeignKey("ArticlesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("theSneakerDon.Models.Customer", b =>
