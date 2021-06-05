@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using theSneakerDon.ActionFilters;
 using theSneakerDon.Data;
 using theSneakerDon.Models;
+using theSneakerDon.Services;
 
 namespace theSneakerDon
 {
@@ -46,6 +47,8 @@ namespace theSneakerDon
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
 
+
+            services.AddTransient<GeocodingService>();
             services.AddScoped<ClaimsPrincipal>(s => s.GetService<IHttpContextAccessor>().HttpContext.User);
             services.AddControllers(config =>
             {

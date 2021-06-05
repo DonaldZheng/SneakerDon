@@ -57,6 +57,16 @@ namespace theSneakerDon.Models
         {
             get; set;
         }
+        [Display(Name = "Longitude")]
+        public double Longitude
+        {
+            get; set;
+        }
+        [Display(Name = "Latitude")]
+        public double Latitude
+        {
+            get; set;
+        }
         [ForeignKey("IdentityUser")]
         public string IdentityUserId
         {

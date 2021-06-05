@@ -223,6 +223,8 @@ namespace theSneakerDon.Migrations
                     ZipCode = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     ShoeSize = table.Column<string>(nullable: true),
+                    Longitude = table.Column<double>(nullable: false),
+                    Latitude = table.Column<double>(nullable: false),
                     IdentityUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -315,8 +317,8 @@ namespace theSneakerDon.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "8938dda1-4aa5-41e2-b3f1-66feaa6e1fc7", "a9dfb6fa-346d-4d0d-ad69-f23a4b02a5fd", "Customer", "CUSTOMER" },
-                    { "31b95350-a092-4d81-86ad-0cc432179b26", "7f8b0c3f-267f-43f7-9992-e527c0f18269", "Admin", "ADMIN" }
+                    { "ddfa0e65-ba88-42e6-80e2-15c880631067", "307f621f-ad43-49fd-872c-e03c40b2e0f9", "Customer", "CUSTOMER" },
+                    { "c0638316-6b9d-4c0a-a533-72d3183c92f2", "486a378c-c7ec-4007-9fbe-58727f42046d", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(

@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using theSneakerDon;
 using theSneakerDon.Data;
 using theSneakerDon.Models;
+using theSneakerDon.Services;
 
 namespace RentalEquipmentCapstone.Controllers
 {
@@ -15,12 +17,16 @@ namespace RentalEquipmentCapstone.Controllers
 
         // GET: CustomerController
         private ApplicationDbContext _context;
-        public CustomerController(ApplicationDbContext context)
+        private GeocodingService _geocoding;
+        public CustomerController(ApplicationDbContext context, GeocodingService geocoding)
         {
             _context = context;
+            _geocoding = geocoding;
         }
         public ActionResult Index()
         {
+            ViewData["APIkeys"] = APIkeys.GoogleAPIKey;
+
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).ToList();
             if (customer.Count == 0)
@@ -34,6 +40,7 @@ namespace RentalEquipmentCapstone.Controllers
         // GET: CustomerController/Details/5
         public ActionResult Details(int id)
         {
+            ViewData["APIkeys"] = APIkeys.GoogleAPIKey;
 
             var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
             return View(customer);
@@ -55,6 +62,8 @@ namespace RentalEquipmentCapstone.Controllers
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
 
+                var customerwithLatLng = await _geocoding.GetGeoCoding(customer);
+
                 _context.Customers.Add(customer);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
@@ -69,6 +78,8 @@ namespace RentalEquipmentCapstone.Controllers
         // GET: CustomerController/Edit/5
         public ActionResult Edit(int id)
         {
+            ViewData["APIkeys"] = APIkeys.GoogleAPIKey;
+
             var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
             return View(customer);
         }
@@ -80,6 +91,8 @@ namespace RentalEquipmentCapstone.Controllers
         {
             try
             {
+                var customerwithLatLng = await _geocoding.GetGeoCoding(customer);
+
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
                 _context.Customers.Update(customer);

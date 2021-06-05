@@ -48,15 +48,15 @@ namespace theSneakerDon.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8938dda1-4aa5-41e2-b3f1-66feaa6e1fc7",
-                            ConcurrencyStamp = "a9dfb6fa-346d-4d0d-ad69-f23a4b02a5fd",
+                            Id = "ddfa0e65-ba88-42e6-80e2-15c880631067",
+                            ConcurrencyStamp = "307f621f-ad43-49fd-872c-e03c40b2e0f9",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "31b95350-a092-4d81-86ad-0cc432179b26",
-                            ConcurrencyStamp = "7f8b0c3f-267f-43f7-9992-e527c0f18269",
+                            Id = "c0638316-6b9d-4c0a-a533-72d3183c92f2",
+                            ConcurrencyStamp = "486a378c-c7ec-4007-9fbe-58727f42046d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -321,6 +321,12 @@ namespace theSneakerDon.Migrations
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
