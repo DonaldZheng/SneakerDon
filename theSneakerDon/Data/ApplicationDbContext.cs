@@ -43,6 +43,14 @@ namespace theSneakerDon.Data
         {
             get; set;
         }
+        public DbSet<Article> Articles
+        {
+            get; set;
+        }
+        public DbSet<ArticleComment> ArticleComments
+        {
+            get; set;
+        }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

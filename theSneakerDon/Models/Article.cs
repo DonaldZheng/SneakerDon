@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace theSneakerDon.Models
+{
+    public class Article
+    {
+        [Key]
+        public int Id
+        {
+            get; set;
+        }
+        [Display(Name = "Customer Name or Anonymous")]
+        public string Title
+        {
+            get; set;
+        }
+        public string Description
+        {
+            get; set;
+        }
+        public bool Active
+        {
+            get; set;
+        }
+        public ICollection<ArticleComment> ArticlesComments
+        {
+            get; set;
+        }
+    }
+}
