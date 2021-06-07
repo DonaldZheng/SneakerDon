@@ -16,7 +16,7 @@ namespace theSneakerDon.Models
             _shoppingCart = shoppingCart;
         }
 
-        public void CreateOrder(Order order)
+        public void CreateOrder(CustomerOrder order)
         {
             order.OrderPlaced = DateTime.Now;
             order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
@@ -37,6 +37,11 @@ namespace theSneakerDon.Models
                 _applicationDbContext.OrderDetails.Add(orderDetail);
             }
             _applicationDbContext.SaveChanges();
+        }
+
+        public void CreateOrder(Stripe.Order order)
+        {
+            throw new NotImplementedException();
         }
     }
 }

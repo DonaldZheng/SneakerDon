@@ -7,6 +7,7 @@ namespace theSneakerDon.Models
 {
     public interface IOrderRepository
     {
-        void CreateOrder(Order order);
+        void CreateOrder(CustomerOrder order);
+        void CreateOrder(Stripe.Order order);
     }
 }

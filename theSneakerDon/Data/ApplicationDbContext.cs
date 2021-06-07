@@ -27,7 +27,7 @@ namespace theSneakerDon.Data
         {
             get; set;
         }
-        public DbSet<Order> Orders
+        public DbSet<CustomerOrder> Orders
         {
             get; set;
         }

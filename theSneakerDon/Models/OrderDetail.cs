@@ -31,7 +31,7 @@ namespace theSneakerDon.Models
         {
             get; set;
         }
-        public Order Order
+        public CustomerOrder Order
         {
             get; set;
         }

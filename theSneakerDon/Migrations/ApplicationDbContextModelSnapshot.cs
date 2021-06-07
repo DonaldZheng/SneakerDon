@@ -48,15 +48,15 @@ namespace theSneakerDon.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "09628951-4896-476c-b578-20be765b0a6d",
-                            ConcurrencyStamp = "9d0f4214-c351-40d1-9594-698b6d43f601",
+                            Id = "cb08055e-6c3b-4add-91de-b236e55e1d5d",
+                            ConcurrencyStamp = "cf059732-757d-4383-bd2a-3eb2a5068dec",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "225f73f8-85a4-4cad-b6b7-fa0bd1addba1",
-                            ConcurrencyStamp = "dd9d4b16-d308-4ea9-b62c-26945b66b2b9",
+                            Id = "edf3dd7a-fbdb-4631-b429-df3a37e9cb0d",
+                            ConcurrencyStamp = "09973c66-d1d2-4a88-971a-09884901c076",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -397,7 +397,35 @@ namespace theSneakerDon.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("theSneakerDon.Models.Order", b =>
+            modelBuilder.Entity("theSneakerDon.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("OrderDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("SneakerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderDetailId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("SneakerId");
+
+                    b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("theSneakerDon.Models.Orders", b =>
                 {
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
@@ -441,34 +469,6 @@ namespace theSneakerDon.Migrations
                     b.HasKey("OrderId");
 
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("theSneakerDon.Models.OrderDetail", b =>
-                {
-                    b.Property<int>("OrderDetailId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("SneakerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderDetailId");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("SneakerId");
-
-                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("theSneakerDon.Models.ShoppingCartItem", b =>
@@ -662,7 +662,7 @@ namespace theSneakerDon.Migrations
 
             modelBuilder.Entity("theSneakerDon.Models.OrderDetail", b =>
                 {
-                    b.HasOne("theSneakerDon.Models.Order", "Order")
+                    b.HasOne("theSneakerDon.Models.Orders", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)

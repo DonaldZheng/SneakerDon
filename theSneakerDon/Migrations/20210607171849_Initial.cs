@@ -354,8 +354,8 @@ namespace theSneakerDon.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "09628951-4896-476c-b578-20be765b0a6d", "9d0f4214-c351-40d1-9594-698b6d43f601", "Customer", "CUSTOMER" },
-                    { "225f73f8-85a4-4cad-b6b7-fa0bd1addba1", "dd9d4b16-d308-4ea9-b62c-26945b66b2b9", "Admin", "ADMIN" }
+                    { "cb08055e-6c3b-4add-91de-b236e55e1d5d", "cf059732-757d-4383-bd2a-3eb2a5068dec", "Customer", "CUSTOMER" },
+                    { "edf3dd7a-fbdb-4631-b429-df3a37e9cb0d", "09973c66-d1d2-4a88-971a-09884901c076", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(

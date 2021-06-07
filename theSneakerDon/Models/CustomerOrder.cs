@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace theSneakerDon.Models
 {
-    public class Order
+    public class CustomerOrder
     {
+        [Key]
         public int OrderId
         {
             get; set;
