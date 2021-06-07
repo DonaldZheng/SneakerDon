@@ -48,15 +48,15 @@ namespace theSneakerDon.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cb08055e-6c3b-4add-91de-b236e55e1d5d",
-                            ConcurrencyStamp = "cf059732-757d-4383-bd2a-3eb2a5068dec",
+                            Id = "43e12355-1742-418e-a92d-2e674ea49993",
+                            ConcurrencyStamp = "33c36103-73ec-492b-84c5-909f7b22cd47",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "edf3dd7a-fbdb-4631-b429-df3a37e9cb0d",
-                            ConcurrencyStamp = "09973c66-d1d2-4a88-971a-09884901c076",
+                            Id = "4d6ea05f-a8c7-4f5f-8d34-e35d200bb2bb",
+                            ConcurrencyStamp = "dc371e3a-8d0c-48cb-bf4d-b74d0b8b186b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -397,35 +397,7 @@ namespace theSneakerDon.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("theSneakerDon.Models.OrderDetail", b =>
-                {
-                    b.Property<int>("OrderDetailId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("SneakerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderDetailId");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("SneakerId");
-
-                    b.ToTable("OrderDetails");
-                });
-
-            modelBuilder.Entity("theSneakerDon.Models.Orders", b =>
+            modelBuilder.Entity("theSneakerDon.Models.CustomerOrder", b =>
                 {
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
@@ -458,6 +430,10 @@ namespace theSneakerDon.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ShoeSize")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -469,6 +445,34 @@ namespace theSneakerDon.Migrations
                     b.HasKey("OrderId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("theSneakerDon.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("OrderDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("SneakerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderDetailId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("SneakerId");
+
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("theSneakerDon.Models.ShoppingCartItem", b =>
@@ -662,7 +666,7 @@ namespace theSneakerDon.Migrations
 
             modelBuilder.Entity("theSneakerDon.Models.OrderDetail", b =>
                 {
-                    b.HasOne("theSneakerDon.Models.Orders", "Order")
+                    b.HasOne("theSneakerDon.Models.CustomerOrder", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)

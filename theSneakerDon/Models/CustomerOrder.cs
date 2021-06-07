@@ -14,43 +14,49 @@ namespace theSneakerDon.Models
         {
             get; set;
         }
-        [Required(ErrorMessage = "Please Enter Your First Name")]
+        [Required(ErrorMessage = "Please Enter First Name")]
         [Display(Name="First Name")]
         public string FirstName
         {
             get; set;
         }
-        [Required(ErrorMessage = "Please Enter Your Last Name")]
+        [Required(ErrorMessage = "Please Enter Last Name")]
         [Display(Name = "Last Name")]
         public string LastName
         {
             get; set;
         }
-        [Required(ErrorMessage = "Please Enter Your Address")]
+        [Required(ErrorMessage = "Please Enter Address")]
         [Display(Name = " Street Address")]
         public string Address
         {
             get; set;
         }
-        [Required(ErrorMessage = "Please Enter Your City")]
+        [Required(ErrorMessage = "Please Enter City")]
         public string City
         {
             get; set;
         }
-        [Required(ErrorMessage = "Please Enter Your State")]
+        [Required(ErrorMessage = "Please Enter State")]
         public string State
         {
             get; set;
         }
-        [Required(ErrorMessage = "Please Enter Your Zip Code")]
+        [Required(ErrorMessage = "Please Enter Zip Code")]
         [Display(Name = "Zip Code")]
         public string ZipCode
         {
             get; set;
         }
-        [Required(ErrorMessage = "Please Enter Your Phone Number")]
+        [Required(ErrorMessage = "Please Enter Phone Number")]
         [Display(Name = "Phone Number")]
         public string PhoneNumber
+        {
+            get; set;
+        }
+        [Required(ErrorMessage = "Please Enter Shoe Size")]
+        [Display(Name = "Shoe Size")]
+        public string ShoeSize
         {
             get; set;
         }

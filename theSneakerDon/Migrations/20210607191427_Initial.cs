@@ -88,6 +88,7 @@ namespace theSneakerDon.Migrations
                     State = table.Column<string>(nullable: false),
                     ZipCode = table.Column<string>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: false),
+                    ShoeSize = table.Column<string>(nullable: false),
                     OrderTotal = table.Column<decimal>(nullable: false),
                     OrderPlaced = table.Column<DateTime>(nullable: false)
                 },
@@ -354,8 +355,8 @@ namespace theSneakerDon.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "cb08055e-6c3b-4add-91de-b236e55e1d5d", "cf059732-757d-4383-bd2a-3eb2a5068dec", "Customer", "CUSTOMER" },
-                    { "edf3dd7a-fbdb-4631-b429-df3a37e9cb0d", "09973c66-d1d2-4a88-971a-09884901c076", "Admin", "ADMIN" }
+                    { "43e12355-1742-418e-a92d-2e674ea49993", "33c36103-73ec-492b-84c5-909f7b22cd47", "Customer", "CUSTOMER" },
+                    { "4d6ea05f-a8c7-4f5f-8d34-e35d200bb2bb", "dc371e3a-8d0c-48cb-bf4d-b74d0b8b186b", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
