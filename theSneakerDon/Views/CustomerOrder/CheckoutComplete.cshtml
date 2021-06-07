@@ -4,23 +4,24 @@
     ViewData["Title"] = "Home Page";
 }
 
+<center>
+    <h1>Billing</h1>
 
-<h1>@ViewBag.CheckoutCompleteMessage</h1>
-
-<div class="text-center">
-    <form asp-action="Charge" asp-controller="CustomerOrder" method="POST">
-        <article>
-            <label>Amount Due: $500.00</label>
+    <div class="text-center">
+        <form asp-action="Charge" asp-controller="CustomerOrder" method="POST">
+            <article>
+                <label>Amount Due: $500.00</label>
 
 
-        </article>
-        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                Stripe.setPublishableKey('PUBLISHABLE_KEY');
-                data-key="@Stripe.Value.PublishableKey"
-                data-description="Sample Charge"
-                data-amount="50000"
-                data-locale="auto">
-        </script>
-    </form>
+            </article>
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    Stripe.setPublishableKey('PUBLISHABLE_KEY');
+                    data-key="@Stripe.Value.PublishableKey"
+                    data-description="Sample Charge"
+                    data-amount="50000"
+                    data-locale="auto">
+            </script>
+        </form>
 
-</div>
+    </div>
+</center>

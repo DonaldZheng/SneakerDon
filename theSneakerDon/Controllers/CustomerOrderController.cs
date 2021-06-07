@@ -70,8 +70,6 @@ namespace theSneakerDon.Controllers
                     {"OrderId", "01" },
                     {"PostCode", "53202" }
                 }
-
-
             });
             if (charge.Status == "succeeded")
             {
